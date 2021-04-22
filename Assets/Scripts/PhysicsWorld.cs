@@ -5,6 +5,10 @@ namespace SPE
 {
     public class PhysicsWorld : GCTools.CreateSingleton<PhysicsWorld>
     {
+        [Header("水")]
+        public float WaterHeight;
+        public float WaterDensity;
+
         public ParticleForceRegistry Registry;
 
         private HashSet<Particle> m_allParticles;

@@ -34,6 +34,7 @@ namespace SPE
 
         public float RestLength;
         public float K;
+        public bool Bungee; //橡皮筋式弹簧。 当距离小于restline时，不反弹
 
         [SerializeField]
         private Particle[] m_particles = new Particle[2];
@@ -62,7 +63,7 @@ namespace SPE
         {
             if(m_ps != null)
             {
-                m_ps.OnDestroy();
+                m_ps.UnReg();
             }
         }
 

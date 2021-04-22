@@ -17,6 +17,9 @@ namespace SPE
                 return;
 
             Vector3 dp = m_s.A.transform.position - m_s.B.transform.position;
+            if (m_s.Bungee && dp.magnitude <= m_s.RestLength)
+                return;
+
             Vector3 force = -m_s.K* (dp.magnitude - m_s.RestLength) * dp.normalized;
             m_s.A.AddForce(force);
 

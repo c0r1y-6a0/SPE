@@ -6,12 +6,17 @@ namespace SPE
     {
         public ParticleForceGenerator()
         {
+            Reg();
+        }
+
+        public void Reg()
+        {
             PhysicsWorld.Instance.Registry.Add(this);
         }
 
         public abstract void UpdateForce(float dt);
 
-        public void OnDestroy()
+        public void UnReg()
         {
             PhysicsWorld.Instance.Registry.Remove(this);
         }
