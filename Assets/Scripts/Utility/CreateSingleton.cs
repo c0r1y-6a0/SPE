@@ -21,7 +21,7 @@ namespace GCTools
                 {
                     instance = FindObjectOfType<T>();
 
-                    if (instance == null && Application.isPlaying)
+                    if (instance == null && Application.isPlaying &&!isDestroy)
                     {
                         var obj = new GameObject(typeof(T).Name);
                         instance = obj.AddComponent<T>();

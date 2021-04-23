@@ -45,6 +45,13 @@ namespace SPE
                 m_inverseMass = 1f / value;
             }
         }
+        public float InverseMass
+        {
+            get
+            {
+                return m_inverseMass;
+            }
+        }
 
         private float m_mass = 1;
         private float m_inverseMass; 

@@ -18,7 +18,8 @@ namespace SPE
 
         public void UnReg()
         {
-            PhysicsWorld.Instance.Registry.Remove(this);
+            if(PhysicsWorld.Instance != null)
+                PhysicsWorld.Instance.Registry.Remove(this);
         }
     }
 
