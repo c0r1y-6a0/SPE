@@ -134,7 +134,7 @@ namespace SPE
             {
                 return;
             }
-            Gizmos.color = Color.green;
+            Gizmos.color = new Color(0.4f, 0.7f, 0.5f);
             var p0 = ends[0].transform.position;
             var p1 = ends[1].transform.position;
             Gizmos.DrawLine(p0, p1);

@@ -339,8 +339,8 @@ MonoBehaviour:
   Acceleration: {x: 0, y: 0, z: 0}
   Damping: 0.99
   Gravity: {x: 0, y: 0, z: 0}
-  K1: 0
-  K2: 0
+  K1: 3
+  K2: 3
   Volume: 0
   HalfHeight: 0
 --- !u!23 &1161719677
@@ -549,8 +549,8 @@ MonoBehaviour:
   Acceleration: {x: 0, y: 0, z: 0}
   Damping: 0.99
   Gravity: {x: 0, y: 0, z: 0}
-  K1: 0
-  K2: 0
+  K1: 3
+  K2: 3
   Volume: 0
   HalfHeight: 0
 --- !u!23 &1298282569
@@ -720,7 +720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2144785498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -737,7 +737,7 @@ MonoBehaviour:
   - {fileID: 1161719676}
   - {fileID: 1298282568}
   Restitution: 1
-  MaxLength: 2
+  MaxLength: 3
 --- !u!4 &2144785499
 Transform:
   m_ObjectHideFlags: 0
