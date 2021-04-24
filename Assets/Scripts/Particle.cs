@@ -27,7 +27,6 @@ namespace SPE
         public float Volume;
         public float HalfHeight;
 
-        [field: SerializeField]
         public float Mass
         {
             get

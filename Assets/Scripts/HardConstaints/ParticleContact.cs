@@ -9,7 +9,7 @@ namespace SPE
         public float Restitution;
         public Vector3 ContactNormal;
         public float Penetration; //沿着ContactNormal的碰撞的渗透深度
-        public Vector3[] ParticleMovement;//因为Penetration，每个Object应该移动的距离
+        public Vector3[] ParticleMovement = new Vector3[2];//因为Penetration，每个Object应该移动的距离
 
 
         private float GetTotalInverseMass()
@@ -22,13 +22,13 @@ namespace SPE
             return totalInverseMass;
         }
 
-        protected void Resolve(float dt)
+        public void Resolve(float dt)
         {
             ResolveVelovity(dt);
             ResolveInterpenetration(dt);
         }
 
-        protected float CalculateSeparatingVelocity()
+        public float CalculateSeparatingVelocity()
         {
             Vector3 relativeVelocity = Particles[0].Velocity;
             if (Particles[1] != null)
@@ -96,8 +96,8 @@ namespace SPE
             Particles[0].transform.position += ParticleMovement[0];
             if(Particles[1] != null)
             {
-                ParticleMovement[1] = Particles[0].Mass / totalInverseMass * Penetration * ContactNormal;
-                Particles[1].transform.position -= ParticleMovement[1];
+                ParticleMovement[1] = -Particles[0].Mass / totalInverseMass * Penetration * ContactNormal;
+                Particles[1].transform.position += ParticleMovement[1];
             }
         }
     }
