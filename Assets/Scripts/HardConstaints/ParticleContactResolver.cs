@@ -6,11 +6,11 @@ namespace SPE
 {
     class ParticleContactResolver
     {
-        public uint MaxIterations { get; set; }
+        public int MaxIterations { get; set; }
 
-        private uint m_usedIterations;
+        private int m_usedIterations;
 
-        public ParticleContactResolver(uint iter)
+        public ParticleContactResolver(int iter)
         {
             MaxIterations = iter;
         }

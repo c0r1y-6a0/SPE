@@ -65,7 +65,7 @@ namespace GCTools
                 var s = instance as CreateSingleton<T>;
                 s.DuplicateDetection(this as T);
 
-                Destroy(this.gameObject);
+                //Destroy(this.gameObject);
             }
         }
 

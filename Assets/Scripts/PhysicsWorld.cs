@@ -11,7 +11,23 @@ namespace SPE
 
         public ParticleForceRegistry Registry;
         public int MaxContacts;
-        public uint MaxResolverIterations;
+
+        public int MaxResolverIterations
+        {
+            get
+            {
+                return m_resolverIterions;
+            }
+            set
+            {
+                m_resolverIterions = value;
+                if (Application.isPlaying)
+                    m_resolver.MaxIterations = value;
+            }
+        }
+
+        [HideInInspector, SerializeField]
+        private int m_resolverIterions;
 
         private HashSet<Particle> m_allParticles;
         private HashSet<ParticleContactGenerator> m_contactGenerators;
@@ -28,6 +44,10 @@ namespace SPE
             m_resolver = new ParticleContactResolver(MaxResolverIterations);
         }
 
+        protected override void DuplicateDetection(PhysicsWorld duplicate)
+        {
+        }
+
         void FixedUpdate()
         {
             Registry.UpdateForces(Time.fixedDeltaTime);
@@ -40,6 +60,11 @@ namespace SPE
             if(contactCount > 0)
             {
                 m_resolver.ResolveContact(m_contacts, Time.fixedDeltaTime);
+            }
+
+            foreach (Particle p in m_allParticles)
+            {
+                p.OnPostPhysicsUpdate();
             }
         }
 

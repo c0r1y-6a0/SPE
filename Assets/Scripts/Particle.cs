@@ -11,8 +11,28 @@ namespace SPE
     public class Particle : MonoBehaviour
     {
         public bool Static;
+        public bool EnableDebug;
 
-        public Vector3 Velocity; 
+        private void MyLog(string s)
+        {
+            if (EnableDebug)
+                Debug.Log(string.Format("Frame : {0}, {1}", Time.frameCount, s));
+        }
+
+        public Vector3 Velocity
+        {
+            get
+            {
+                return m_v;
+            }
+            set
+            {
+                m_v = value;
+                MyLog("Velocity: " + Velocity);
+            }
+        }
+
+        private Vector3 m_v;
 
         public Vector3 Acceleration;  //可以直接改变
 
@@ -52,8 +72,12 @@ namespace SPE
             }
         }
 
-        private float m_mass = 1;
-        private float m_inverseMass; 
+        [SerializeField]
+        [HideInInspector]
+        private float m_mass;
+        [SerializeField]
+        [HideInInspector]
+        private float m_inverseMass;
         private Vector3 m_forceAccu;  //记录了力的总合。用于一次迭代计算，迭代完一次后清零
 #if UNITY_EDITOR
         private Vector3 m_gizmoForce;
@@ -90,6 +114,7 @@ namespace SPE
 
 
             Vector3 resultingAcc = Acceleration;
+            MyLog("Acc Force : " + m_forceAccu);
             resultingAcc += m_forceAccu * m_inverseMass;
 
             Velocity += resultingAcc * dt;
@@ -101,8 +126,14 @@ namespace SPE
             m_forceAccu = Vector3.zero;
         }
 
+        public void OnPostPhysicsUpdate()
+        {
+            MyLog("Position: " + transform.position);
+        }
+
         public void AddForce(Vector3 force)
         {
+            MyLog("Add Force : " + force);
             m_forceAccu += force;
         }
 
