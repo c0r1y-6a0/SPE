@@ -14,12 +14,12 @@ namespace SPE
 
         private float GetTotalInverseMass()
         {
-            float totalInverseMass = Particles[0].Mass;
+            float totalInverseMass = Particles[0].InverseMass;
             if (Particles[1] != null)
             {
-                totalInverseMass += Particles[1].Mass;
+                totalInverseMass += Particles[1].InverseMass;
             }
-            return 1 / totalInverseMass;
+            return totalInverseMass;
         }
 
         public void Resolve(float dt)
@@ -72,10 +72,10 @@ namespace SPE
             float impluse = deltaVelocity / totalInverseMass;
             Vector3 dirImpluse = ContactNormal * impluse;
 
-            Particles[0].Velocity += dirImpluse * Particles[0].Mass;
+            Particles[0].Velocity += dirImpluse * Particles[0].InverseMass;
             if(Particles[1] != null)
             {
-                Particles[1].Velocity -= dirImpluse * Particles[1].Mass;
+                Particles[1].Velocity -= dirImpluse * Particles[1].InverseMass;
             }
         }
 
@@ -92,11 +92,11 @@ namespace SPE
                 return;
             }
 
-            ParticleMovement[0] = Particles[1].Mass * totalInverseMass * Penetration * ContactNormal;
+            ParticleMovement[0] = Particles[0].InverseMass * (Penetration * ContactNormal / totalInverseMass);
             Particles[0].transform.position += ParticleMovement[0];
             if(Particles[1] != null)
             {
-                ParticleMovement[1] = -Particles[0].Mass * totalInverseMass * Penetration * ContactNormal;
+                ParticleMovement[1] = -Particles[1].InverseMass * (Penetration * ContactNormal / totalInverseMass);
                 Particles[1].transform.position += ParticleMovement[1];
             }
         }

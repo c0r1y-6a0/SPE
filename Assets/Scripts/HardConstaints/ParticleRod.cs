@@ -27,7 +27,8 @@ namespace SPE
 
         void OnDestroy()
         {
-            PhysicsWorld.Instance.RemoveContactGenerator(this);
+            if(PhysicsWorld.Instance != null)
+                PhysicsWorld.Instance.RemoveContactGenerator(this);
         }
 
 
